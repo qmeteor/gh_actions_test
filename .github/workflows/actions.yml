@@ -10,7 +10,7 @@ jobs:
         run: |
           pwd
           ls -a
-          echo $GITHUB_SHA
+          echo $GITHUB_SHA = a4dfc57a75c872a737153b2c6312dbb8fd0166e3
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
           echo "${{ github.token }}"
