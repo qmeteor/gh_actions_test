@@ -1,3 +1,1 @@
-## Git Action Tutorial
-
-### Added a developer branch.
+### Git Action Tutorial
