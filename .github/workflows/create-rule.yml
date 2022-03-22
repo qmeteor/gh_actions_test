@@ -27,11 +27,11 @@ jobs:
           uses: juliangruber/read-file-action@v1
           with:
             path: ./actions-fixed-response.json
-      - name: Create listener rule with the AWS CLI
-        run: |
-              aws elbv2 create-rule \
-                --listener-arn arn:aws:elasticloadbalancing:ca-central-1:874453450447:listener/app/pre-stage-alb/b96687512c5ec42d/eb0f3fc9f0a86b1a \
-                --priority 5 \
-                --conditions ${{ steps.host.outputs.content}} \
-                --actions ${{ steps.actions.outputs.content }}
+#      - name: Create listener rule with the AWS CLI
+#        run: |
+#              aws elbv2 create-rule \
+#                --listener-arn arn:aws:elasticloadbalancing:ca-central-1:874453450447:listener/app/pre-stage-alb/b96687512c5ec42d/eb0f3fc9f0a86b1a \
+#                --priority 5 \
+#                --conditions ${{ steps.host.outputs.content}} \
+#                --actions ${{ steps.actions.outputs.content }}
 
