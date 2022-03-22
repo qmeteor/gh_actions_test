@@ -14,8 +14,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          role-duration-seconds: 1200
-          aws-region: ca-central-1
+          role-duration-seconds: ${{ secrets.ROLE_DURATION }}
+          aws-region: ${{ secrets.AWS_REGION}}
       - name: Log start
         run: echo logging into aws with OIDC
       - name: Login to Amazon ECR
