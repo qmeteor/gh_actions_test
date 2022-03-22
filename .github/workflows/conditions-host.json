@@ -1,0 +1,8 @@
+[
+  {
+    "Field": "host-header",
+    "HostHeaderConfig": {
+      "Values": ["bien.dev.venngage.beer"]
+    }
+  }
+]

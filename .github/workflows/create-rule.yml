@@ -1,0 +1,37 @@
+name: Create Load Balancer Rule (ALB)
+
+on: [push]
+
+jobs:
+  run-cli-command:
+    name: Create ALB Rule
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-duration-seconds: ${{ secrets.ROLE_DURATION }}
+          aws-region: ${{ secrets.AWS_REGION}}
+
+      - name: Read conditions-host.json
+          id: host
+          uses: juliangruber/read-file-action@v1
+          with:
+            path: ./conditions-host.json
+      - name: Read actions-fixed-response.json
+          id: actions
+          uses: juliangruber/read-file-action@v1
+          with:
+            path: ./actions-fixed-response.json
+      - name: Create listener rule with the AWS CLI
+        run: |
+              aws elbv2 create-rule \
+                --listener-arn arn:aws:elasticloadbalancing:ca-central-1:874453450447:listener/app/pre-stage-alb/b96687512c5ec42d/eb0f3fc9f0a86b1a \
+                --priority 5 \
+                --conditions ${{ steps.host.outputs.content}} \
+                --actions ${{ steps.actions.outputs.content }}
+
