@@ -13,10 +13,11 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::874453450447:role/github_actions_poweruser
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-duration-seconds: 1200
           aws-region: ca-central-1
       - name: Log start
-        run: echo logging into aw with OIDC
+        run: echo logging into aws with OIDC
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
