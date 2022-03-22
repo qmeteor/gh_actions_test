@@ -1,0 +1,22 @@
+name: AWS API Calls (ca-central-1)
+
+on: [push]
+
+jobs:
+  run-cli-command:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::874453450447:role/github_actions_poweruser
+          aws-region: ca-central-1
+      - name: Log start
+        run: echo logging into aw with OIDC
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
