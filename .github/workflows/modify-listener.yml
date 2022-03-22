@@ -28,11 +28,11 @@ jobs:
               "ForwardConfig": {
                 "TargetGroups": [{
                   "TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/default-not-used-tg/d6025670f51907f3",
-                  "Weight": 90
+                  "Weight": 50
                 },
                   {
                     "TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/nginx-Targe-I1J9MKBZDUW8/725570059138c9e5",
-                    "Weight": 10
+                    "Weight": 50
                   }
                 ],
                 "TargetGroupStickinessConfig": {
