@@ -1,4 +1,4 @@
-name: AWS API Calls (ca-central-1)
+name: AWS API Calls
 
 on: [push]
 

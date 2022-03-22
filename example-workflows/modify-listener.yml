@@ -1,0 +1,38 @@
+name: Modify Load Balancer Listener (ALB)
+
+on: [push]
+
+jobs:
+  run-cli-command:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-duration-seconds: ${{ secrets.ROLE_DURATION }}
+          aws-region: ${{ secrets.AWS_REGION}}
+
+      - name: Change alb listener with the AWS CLI
+        run: |
+          aws elbv2 modify-listener \
+            --listener-arn "arn:aws:elasticloadbalancing:ca-central-1:874453450447:listener/app/pre-stage-alb/b96687512c5ec42d/eb0f3fc9f0a86b1a" \
+            --default-actions \
+            '[{
+               "Type": "forward",
+               "Order": 1,
+               "ForwardConfig": {
+                  "TargetGroups": [
+                     {"TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/default-not-used-tg/d6025670f51907f3", "Weight": 90}, \
+                     {"TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/nginx-Targe-I1J9MKBZDUW8/725570059138c9e5", "Weight": 10}, \
+                  ],
+                  "TargetGroupStickinessConfig": {
+                     "Enabled": true,
+                     "DurationSeconds": 120
+                  }
+               }
+            }]'
