@@ -27,8 +27,8 @@ jobs:
                "Order": 1,
                "ForwardConfig": {
                   "TargetGroups": [
-                     {"TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/default-not-used-tg/d6025670f51907f3", "Weight": 90}, \
-                     {"TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/nginx-Targe-I1J9MKBZDUW8/725570059138c9e5", "Weight": 10}, \
+                     {"TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/default-not-used-tg/d6025670f51907f3", "Weight": 90}, 
+                     {"TargetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/nginx-Targe-I1J9MKBZDUW8/725570059138c9e5", "Weight": 10}, 
                   ],
                   "TargetGroupStickinessConfig": {
                      "Enabled": true,
