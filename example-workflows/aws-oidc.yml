@@ -1,4 +1,4 @@
-name: AWS API Calls
+name: Git Actions with AWS OIDC
 
 on: [push]
 
@@ -18,6 +18,3 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION}}
       - name: Log start
         run: echo logging into aws with OIDC
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
