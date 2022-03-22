@@ -1,0 +1,26 @@
+name: Modify Load Balancer Rule (ALB)
+
+on: [push]
+
+jobs:
+  run-cli-command:
+    name: Modify ALB Rule
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-duration-seconds: ${{ secrets.ROLE_DURATION }}
+          aws-region: ${{ secrets.AWS_REGION}}
+
+      - name: Change alb listener with the AWS CLI
+        run: |
+          aws elbv2 modify-rule \
+            --actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:ca-central-1:874453450447:targetgroup/nginx-Targe-I1J9MKBZDUW8/725570059138c9e5 \
+            --conditions Field=path-pattern,Values='/images/*' \
+            --rule-arn arn:aws:elasticloadbalancing:ca-central-1:874453450447:listener-rule/app/pre-stage-alb/b96687512c5ec42d/eb0f3fc9f0a86b1a/8ce0f40470b45879
+
